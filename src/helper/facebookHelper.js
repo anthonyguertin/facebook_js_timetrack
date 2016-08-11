@@ -12,6 +12,10 @@ function testApi(facebook)
           'Thanks for logging in,' + whitespace + response.name + '!';
     });
 }
+function updatedTimeResponse(response)
+{
+    console.log('response from callback %o: ', response);
+}
 function getUpdatedTime(facebook, updatedTimeDoCallBack)
 {
     //console.log('updated time:' + whitespace);
@@ -26,16 +30,20 @@ function getUpdatedTime(facebook, updatedTimeDoCallBack)
         {
             if (response && !response.error)
             {
+                //console.log('ISO 8601 TIME %o: ', response);
                 var updated_time = response.updated_time;
                 if (updated_time)
                 {
                     var d = new Date(updated_time);
+                    //fetchResultFromCallback(response);
+                    //console.log('DATE_TIME: ', d);
+                    //console.log('LOCAL TIME ', d.getTimezoneOffset());
                     updatedTimeDoCallBack(response);
                 }
             }
             else
             {
-                console.log(response.error);
+                //console.log(response.error);
             }
         }
     );
